@@ -67,7 +67,7 @@ func MaterialPut(w http.ResponseWriter, r *http.Request) {
 
 	// get the id from the request params, key is "id"
 	params := mux.Vars(r)
-	var material models.UpdateMaterial
+	var material models.Material
 	material.MaterialID = params["id"]
 
 	//目前只會使用到material.quantity參數

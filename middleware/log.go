@@ -20,7 +20,7 @@ import (
 func LogPost(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 
-	var log models.Log
+	var log models.MaterialLog
 	err := json.NewDecoder(r.Body).Decode(&log)
 	if err != nil {
 		rDecodeErr(w, err)

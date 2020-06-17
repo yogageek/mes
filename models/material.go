@@ -16,34 +16,24 @@ type Material struct {
 	TypeID        string `json:"type_id,omitempty"`
 	TypeName      string `json:"type_name,omitempty"`
 	StockLocation string `json:"stock_location,omitempty"`
-	MinQty        int32  `json:"min_qty,omitempty"`
+	MinQty        int    `json:"min_qty,omitempty"`
+	Quantity      int    `json:"quantity,omitempty"`
+	TotalStock    int    `json:"total_stock,omitempty"`
 	Timestamp     string `json:"timestamp,omitempty"`
-	TotalStock    int32  `json:"total_stock,omitempty"`
-}
-
-type UpdateMaterial struct {
-	MaterialID    string `json:"material_id,omitempty"`
-	MaterialName  string `json:"material_name,omitempty"`
-	TypeID        string `json:"type_id,omitempty"`
-	TypeName      string `json:"type_name,omitempty"`
-	StockLocation string `json:"stock_location,omitempty"`
-	MinQty        int32  `json:"min_qty,omitempty"`
-	Timestamp     string `json:"timestamp,omitempty"`
-	Quantity      int32  `json:"quantity,omitempty"`
 }
 
 //update material quantitiy request
 type UpdateMaterialQuantity struct {
-	Quantity int32 `json:"quantity,omitempty"`
+	Quantity int `json:"quantity,omitempty"`
 }
 
 //get materials request
 type MaterialFilter struct {
 	// Offset int64 `schema:"offset"`
-	Limit  int64  `schema:"limit"`
+	Limit  int    `schema:"limit"`
 	SortBy string `schema:"sortby"`
 	Desc   bool   `schema:"desc"`
-	Page   int64  `schema:"page"`
+	Page   int    `schema:"page"`
 
 	//User specific filters
 	MaterialID    string `schema:"material_id,omitempty"`
@@ -51,4 +41,17 @@ type MaterialFilter struct {
 	TypeID        string `schema:"type_id,omitempty"`
 	TypeName      string `schema:"type_name,omitempty"`
 	StockLocation string `schema:"stock_location,omitempty"`
+}
+
+type MaterialLog struct {
+	MaterialID   *string `json:"material_id,omitempty"`
+	MaterialName *string `json:"material_name,omitempty"`
+	TypeID       *string `json:"type_id,omitempty"`
+	TypeName     *string `json:"type_name,omitempty"`
+	InOrOut      *string `json:"in_or_out,omitempty"`
+	Timestamp    *string `json:"timestamp,omitempty"`
+	StaffID      *string `json:"staff_id,omitempty"`
+	StaffName    *string `json:"staff_name,omitempty"`
+	Quantity     *int    `json:"quantity,omitempty"`
+	LogSn        *int    `json:"log_sn,omitempty"`
 }

@@ -13,7 +13,7 @@ func AddMaterial(m models.Material) error {
 	return nil
 }
 
-func UpdateMaterial(um models.UpdateMaterial) error {
+func UpdateMaterial(um models.Material) error {
 	if um.MaterialID == "" {
 		err := models.MyError{
 			Message:     "empty value",
