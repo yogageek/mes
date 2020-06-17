@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: material-management-api
+spec:
+  selector:
+    matchLabels:
+      run: material-management-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: material-management-api
+    spec:
+      containers:
+      - name: material-management-api
+        image: changekaid0ck3r/material-management-api:1.0.0
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128M
+            ephemeral-storage: 128M
+          limits:
+            cpu: 400m
+            memory: 512M
+            ephemeral-storage: 256M
+        ports:
+        - containerPort: 8080
+          name: http
+        env:
+        - name: POSTGRES_URL
+          value: "host=42.159.86.191 port=5432 user=46d1a69b-6cd1-4b94-b009-537e2d575bba password=ssc8u7occfhqm3q6gkhm0gvcua dbname=ecd73592-abcd-4a8e-a7c9-26e1d5bab72c sslmode=disable"

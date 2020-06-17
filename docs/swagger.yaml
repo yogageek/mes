@@ -1,0 +1,364 @@
+---
+swagger: "2.0"
+info:
+  description: "Materials API"
+  version: "2.0"
+  title: "Material Management"
+  contact:
+    name: "Kenny"
+    email: "kenny.chen@iii.org.tw"
+  license:
+    name: "WISEPaaS 4.0"
+tags:
+- name: "Materials"
+  description: "物料入/出庫管理作業"
+- name: "Log"
+  description: "物料入/出庫紀錄"
+paths:
+  /materials:
+    get:
+      tags:
+      - "Materials"
+      summary: "get all materials"
+      description: "取得所有物料紀錄"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "page"
+        in: "query"
+        required: false
+        type: "integer"
+        x-exportParamName: "Page"
+        x-optionalDataType: "Int32"
+      - name: "size"
+        in: "query"
+        required: false
+        type: "integer"
+        x-exportParamName: "Size"
+        x-optionalDataType: "Int32"
+      - name: "sort"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "Sort"
+        x-optionalDataType: "String"
+      - name: "sort_by"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "SortBy"
+        x-optionalDataType: "String"
+      - name: "material_id"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "MaterialId"
+        x-optionalDataType: "String"
+      - name: "material_name"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "MaterialName"
+        x-optionalDataType: "String"
+      - name: "type_id"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "TypeId"
+        x-optionalDataType: "String"
+      - name: "type_name"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "TypeName"
+        x-optionalDataType: "String"
+      - name: "stock_location"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "StockLocation"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "Material list"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/swagger.Material"
+        "400":
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/swagger.Err"
+  /materials/latest:
+    get:
+      tags:
+      - "Materials"
+      summary: "get latest material"
+      description: "取得最大時間戳物料"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+        "400":
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/swagger.Err"
+  /material:
+    post:
+      tags:
+      - "Materials"
+      summary: "create material"
+      description: "新增物料"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "201":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/swagger.Material"
+        "400":
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/swagger.Err"
+  /materials/{id}:
+    put:
+      tags:
+      - "Materials"
+      summary: "stock out"
+      description: "物料狀態更新"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Material ID"
+        required: true
+        type: "string"
+        x-exportParamName: "Id"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/swagger.UpdateMaterial"
+        "400":
+          description: "{\"error\":\"account not exist\"}"
+          schema:
+            $ref: "#/definitions/swagger.Err"
+    delete:
+      tags:
+      - "Materials"
+      summary: "delete material"
+      description: "刪除物料"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Material ID"
+        required: true
+        type: "string"
+        x-exportParamName: "Id"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+        "400":
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/swagger.Err"
+  /logs:
+    get:
+      tags:
+      - "Log"
+      summary: "get logs"
+      description: "列出Log紀錄"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "page"
+        in: "query"
+        required: false
+        type: "integer"
+        x-exportParamName: "Page"
+        x-optionalDataType: "Int32"
+      - name: "size"
+        in: "query"
+        required: false
+        type: "integer"
+        x-exportParamName: "Size"
+        x-optionalDataType: "Int32"
+      - name: "sort"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "Sort"
+        x-optionalDataType: "String"
+      - name: "sort_by"
+        in: "query"
+        required: false
+        type: "string"
+        x-exportParamName: "SortBy"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/swagger.Log"
+        "400":
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/swagger.Err"
+  /logs/latest:
+    get:
+      tags:
+      - "Materials"
+      summary: "get latest inventory log"
+      description: "取得最大時間戳物料紀錄"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+        "400":
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/swagger.Err"
+  /log:
+    post:
+      tags:
+      - "Log"
+      summary: "create log"
+      description: "建立Log紀錄"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
+        "400":
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/swagger.Err"
+definitions:
+  swagger.Material:
+    type: "object"
+    properties:
+      material_id:
+        type: "string"
+      material_name:
+        type: "string"
+      type_id:
+        type: "string"
+      type_name:
+        type: "string"
+      total_stock:
+        type: "integer"
+      min_qty:
+        type: "integer"
+      stock_location:
+        type: "string"
+      timestamp:
+        type: "string"
+    example:
+      material_id: "A000001"
+      material_name: "物料A"
+      type_id: "BB001"
+      type_name: "類別B"
+      total_stock: 1292
+      min_qty: 50
+      stock_location: "C1"
+      timestamp: "2020-05-03 04:09:53.001444+00"
+  swagger.UpdateMaterial:
+    type: "object"
+    properties:
+      material_id:
+        type: "string"
+      material_name:
+        type: "string"
+      type_id:
+        type: "string"
+      type_name:
+        type: "string"
+      quantity:
+        type: "integer"
+      min_qty:
+        type: "integer"
+      stock_location:
+        type: "string"
+      timestamp:
+        type: "string"
+    example:
+      material_id: "A000001"
+      material_name: "物料A"
+      type_id: "BB001"
+      type_name: "類別B"
+      quantity: 50
+      min_qty: 50
+      stock_location: "C1"
+      timestamp: "2020-05-03 04:09:53.001444+00"
+  swagger.Log:
+    type: "object"
+    properties:
+      material_id:
+        type: "string"
+      material_name:
+        type: "string"
+      type_id:
+        type: "string"
+      type_name:
+        type: "string"
+      in_or_out:
+        type: "string"
+      timestamp:
+        type: "string"
+      staff_id:
+        type: "string"
+      staff_name:
+        type: "string"
+      quantity:
+        type: "integer"
+      log_sn:
+        type: "integer"
+    example:
+      material_id: "B130041"
+      material_name: "物料A"
+      type_id: "EU004"
+      type_name: "類別B"
+      in_or_out: "入庫"
+      timestamp: "2020-05-03 04:09:53.001444+00"
+      staff_id: "990818"
+      staff_name: "Kenny"
+      quantity: 500
+      log_sn: 3
+  swagger.Err:
+    type: "object"
+    properties:
+      error:
+        type: "string"

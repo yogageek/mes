@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: material-management-api
+spec:
+  rules:
+  - host: material-management-api.ifactory.eks009.en.internal
+    http:
+      paths:
+      - backend:
+          serviceName: material-management-api
+          servicePort: 8080
+        path: /

@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch go",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",            
+            "program": "${workspaceFolder}/main.go",
+            // "go.gopath":"~/workspace/src",
+            "envFile": "${workspaceFolder}//.env", //envFile會覆蓋掉env(如果名稱有重複)
+            "env": {},
+            "args": [
+                "--logtostderr",
+                "--v=5"
+                // "--insecure" //flag用 只要有放就是true 請看main.go定義
+            ]
+        }
+    ]
+}
