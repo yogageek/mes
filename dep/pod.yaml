@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: material-management-api
-        image: changekaid0ck3r/material-management-api:1.0.0
+        image: iiicondor/material_management_api:1.0.0
         imagePullPolicy: Always
         resources:
           requests:
